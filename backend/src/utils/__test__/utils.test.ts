@@ -2,6 +2,7 @@ import request from 'supertest';
 import {
   doesEPAJsonFileExist,
   readFallbackFile,
+  transformEPAToJSON,
 } from '../utils';
 
 const JSON_FILE_PATH: string = `${__dirname}/../../epa.json`;
@@ -27,7 +28,24 @@ it('Reads fallback file', async () => {
   expect(epaUnformattedRecords.length).toEqual(47748);
 });
 
-it('Converts EPA input to JSON format', () => {
+it.only('Converts EPA input to JSON format', async () => {
+  const epaUnformattedRecords = await readFallbackFile();
+  const epaJSONRecords = transformEPAToJSON(epaUnformattedRecords);
+  expect(epaJSONRecords).not.toBeNull();
+  expect(epaJSONRecords.length).toEqual(47619);
+  expect(epaJSONRecords[0].host).toEqual('141.243.1.172');
+  expect(epaJSONRecords[0].datetime.day).toEqual(29);
+  expect(epaJSONRecords[0].datetime.hour).toEqual(23);
+  expect(epaJSONRecords[0].datetime.minute).toEqual(53);
+  expect(epaJSONRecords[0].datetime.second).toEqual(25);
+  expect(epaJSONRecords[0].request.method).toEqual('GET');
+  expect(epaJSONRecords[0].request.url).toEqual('/Software.html');
+  expect(epaJSONRecords[0].request.protocol).toEqual('HTTP');
+  expect(epaJSONRecords[0].request.protocol_version).toEqual('1.0');
+  expect(epaJSONRecords[0].response_code).toEqual(200);
+  expect(epaJSONRecords[0].document_size).toEqual(1497);
+  expect(epaJSONRecords[0].error).toEqual(false);
+
 });
 
 it('Serves JSON content', () => {
