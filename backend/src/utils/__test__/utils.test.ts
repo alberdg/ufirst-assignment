@@ -1,3 +1,4 @@
+import request from 'supertest';
 import {
   doesEPAJsonFileExist,
 } from '../utils';
@@ -11,8 +12,11 @@ it('Makes sure JSON file exists', () => {
 });
 
 
-it ('Reads file from epa http server', () => {
-
+it('Reads file from epa http server', async () => {
+  await request('https://ita.ee.lbl.gov')
+    .get('/html/contrib/EPA-HTTP.html')
+    .send({})
+    .expect(200);
 });
 
 
