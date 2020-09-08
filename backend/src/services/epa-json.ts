@@ -15,10 +15,8 @@ class EpaJSON {
    */
   async getRecords () {
     if (!Array.isArray(this._records) || this._records.length === 0) {
-      console.log('Reading from file');
       this._records = await getJSONEPARecords();
     }
-    console.log('Returning');
     return this._records;
   }
 }
