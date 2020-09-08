@@ -3,8 +3,7 @@ import { epaJsonInstance } from '../services/epa-json';
 const router = Router();
 
 router.get('/json', async (req: Request, res: Response) => {
-  const records = await epaJsonInstance.getRecords();
-  res.send(records);
+  res.send(epaJsonInstance.records);
 });
 
 export { router as epaJSONRouter };

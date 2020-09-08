@@ -1,9 +1,11 @@
 import request from 'supertest';
 import { app } from '../../app';
+import { epaJsonInstance } from '../../services/epa-json';
 import {
   doesEPAJsonFileExist,
   readFallbackFile,
   transformEPAToJSON,
+  getJSONEPARecords,
 } from '../utils';
 
 const JSON_FILE_PATH: string = `${__dirname}/../../epa.json`;
@@ -50,6 +52,8 @@ it('Converts EPA input to JSON format', async () => {
 });
 
 it('Serves JSON content', async () => {
+  const records = await getJSONEPARecords();
+  epaJsonInstance.records = records;
   const response = await request(app)
     .get('/json')
     .send({});
