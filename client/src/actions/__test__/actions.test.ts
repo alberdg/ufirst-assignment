@@ -1,6 +1,12 @@
 import moxios from 'moxios';
-import { getEPAJsonRecords } from '../actions';
-import { EPA_URL } from '../../constants';
+import {
+  getEPAJsonRecords,
+  getHttpRequestsByMinute,
+} from '../actions';
+import {
+  EPA_URL,
+  HTTP_REQUEST_BY_MINUTE_URL
+} from '../../constants';
 beforeAll(() => {
   moxios.install();
   moxios.stubRequest(EPA_URL, {
@@ -14,6 +20,17 @@ beforeAll(() => {
       {"host":"wpbfl2-45.gate.net","datetime":{"day":29,"hour":23,"minute":54,"second":18},"request":{"method":"GET","url":"/logos/small_gopher.gif","protocol":"HTTP","protocol_version":"1.0"},"response_code":200,"document_size":935,"error":false}
     ]
   });
+
+  moxios.stubRequest(HTTP_REQUEST_BY_MINUTE_URL, {
+    status: 200,
+    response: {
+      "0": 828,
+      "1": 761,
+      "2": 708,
+      "3": 667,
+      "4": 811,
+    }
+  });
 });
 
 afterAll(() => {
@@ -25,3 +42,9 @@ it('Requests EPA json records from backend', async () => {
   expect(response).not.toBeNull();
   expect(response.length).toEqual(6);
 });
+
+it('Requests data for http requests per minute', async () => {
+  const response = await getHttpRequestsByMinute();
+  expect(response).not.toBeNull();
+  expect(response['0']).toEqual(828);
+})
