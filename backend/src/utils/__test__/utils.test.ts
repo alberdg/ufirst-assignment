@@ -1,4 +1,5 @@
 import request from 'supertest';
+import { app } from '../../app';
 import {
   doesEPAJsonFileExist,
   readFallbackFile,
@@ -28,7 +29,7 @@ it('Reads fallback file', async () => {
   expect(epaUnformattedRecords.length).toEqual(47748);
 });
 
-it.only('Converts EPA input to JSON format', async () => {
+it('Converts EPA input to JSON format', async () => {
   const epaUnformattedRecords = await readFallbackFile();
   const epaJSONRecords = transformEPAToJSON(epaUnformattedRecords);
   expect(epaJSONRecords).not.toBeNull();
@@ -48,6 +49,10 @@ it.only('Converts EPA input to JSON format', async () => {
 
 });
 
-it('Serves JSON content', () => {
-
+it('Serves JSON content', async () => {
+  const response = await request(app)
+    .get('/json')
+    .send({});
+  expect(response.status).toEqual(200);
+  expect(response.body.length).toEqual(47619);
 });

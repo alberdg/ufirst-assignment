@@ -158,3 +158,14 @@ export const transformEPAToJSON = (epaRecords: string[]) : EPAJsonRecord[] => {
   return epaRecords.map((record: string) => transformEPARecord(record, errorEpaRecord))
     .filter((record: EPAJsonRecord) => !record.error);
 }
+
+/**
+ * Reads and converts unformatted EPA records to EPAJsonRecord format
+ * @function
+ * @returns records EPAJsonRecord array
+ */
+export const getJSONEPARecords = async () => {
+  // TODO: Implement request to ita.ee.lbl.gov BUT IT IS ALWAYS UNAVAILABLE!!!!
+  const unformatted: string[] = await readFallbackFile();
+  return transformEPAToJSON(unformatted);
+}
