@@ -4,14 +4,12 @@ import {
   getHttpRequestsByMinute,
   getHttpRequestsByMethod,
   getHttpRequestsByAnswerCode,
-  getHttpRequestsBySize,
 } from '../actions';
 import {
   EPA_URL,
   HTTP_REQUEST_BY_MINUTE_URL,
   HTTP_REQUEST_BY_METHOD_URL,
   HTTP_REQUEST_BY_ANSWER_CODE_URL,
-  HTTP_REQUEST_BY_SIZE_URL,
 } from '../../constants';
 beforeAll(() => {
   moxios.install();
@@ -55,28 +53,6 @@ beforeAll(() => {
       "302": 6000,
     }
   });
-
-  moxios.stubRequest(HTTP_REQUEST_BY_SIZE_URL, {
-    status: 200,
-    response: {
-      "0": {
-      "id": "0",
-      "size": 0,
-      "value": 194
-      },
-      "33": {
-      "id": "33",
-      "size": 33,
-      "value": 2
-      },
-      "34": {
-      "id": "34",
-      "size": 34,
-      "value": 1
-      },
-    }
-  });
-
 });
 
 afterAll(() => {
@@ -109,12 +85,4 @@ it('Requests data for http requests per answer code', async () => {
   expect(response['200']).toEqual(30000);
   expect(response['400']).toEqual(10000);
   expect(response['302']).toEqual(6000);
-})
-
-it('Requests data for http requests per size', async () => {
-  const response = await getHttpRequestsBySize();
-  expect(response).not.toBeNull();
-  expect(response['0'].value).toEqual(194);
-  expect(response['33'].value).toEqual(2);
-  expect(response['34'].value).toEqual(1);
 })

@@ -153,6 +153,7 @@ class EpaJSON {
         if (!this._recordsBySize[documentSizeKey]) {
           this._recordsBySize[documentSizeKey] = {
             id: documentSizeKey,
+            size: document_size,
             value: 0
           };
         }
