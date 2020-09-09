@@ -6,6 +6,7 @@ import { THEME } from './constants';
 import './index.css';
 import App from './App';
 import RequestsPerMinute from './components/requests-per-minute';
+import RequestsPerMethod from './components/requests-per-method';
 import * as serviceWorker from './serviceWorker';
 const theme : Theme = createMuiTheme(THEME);
 
@@ -15,7 +16,7 @@ ReactDOM.render(
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={App}/>
-          <Route exact path="/http-methods" component={App}/>
+          <Route exact path="/httpmethods" component={RequestsPerMethod}/>
           <Route exact path="/requests" component={RequestsPerMinute}/>
           <Route exact path="/http-answer-codes" component={App}/>
           <Route exact path="/answers-size" component={App}/>

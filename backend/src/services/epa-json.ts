@@ -85,7 +85,8 @@ class EpaJSON {
       const { method } : { method: string } = record.request;
       if (!this._recordsByMethod[method]) {
         this._recordsByMethod[method] = {
-          method,
+          id: method,
+          label: method,
           value: 0
         };
       }

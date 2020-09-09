@@ -2,10 +2,12 @@ import moxios from 'moxios';
 import {
   getEPAJsonRecords,
   getHttpRequestsByMinute,
+  getHttpRequestsByMethod,
 } from '../actions';
 import {
   EPA_URL,
-  HTTP_REQUEST_BY_MINUTE_URL
+  HTTP_REQUEST_BY_MINUTE_URL,
+  HTTP_REQUEST_BY_METHOD_URL,
 } from '../../constants';
 beforeAll(() => {
   moxios.install();
@@ -31,6 +33,15 @@ beforeAll(() => {
       "4": 811,
     }
   });
+
+  moxios.stubRequest(HTTP_REQUEST_BY_METHOD_URL, {
+    status: 200,
+    response: {
+      "GET": 40828,
+      "POST": 161,
+      "HEAD": 408,
+    }
+  });
 });
 
 afterAll(() => {
@@ -47,4 +58,12 @@ it('Requests data for http requests per minute', async () => {
   const response = await getHttpRequestsByMinute();
   expect(response).not.toBeNull();
   expect(response['0']).toEqual(828);
+})
+
+it('Requests data for http requests per method', async () => {
+  const response = await getHttpRequestsByMethod();
+  expect(response).not.toBeNull();
+  expect(response['GET']).toEqual(40828);
+  expect(response['POST']).toEqual(161);
+  expect(response['HEAD']).toEqual(408);
 })
