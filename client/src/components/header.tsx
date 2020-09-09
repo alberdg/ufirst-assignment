@@ -57,12 +57,12 @@ const Header = () : JSX.Element => {
           </Link>
         </Grid>
         <Grid item xs={12} className={classes.grid}>
-          <Link href="#" id="http-answer-codes" className={classes.menuButton}>
+          <Link href="/answercodes" id="http-answer-codes" className={classes.menuButton}>
             Http answer codes
           </Link>
         </Grid>
         <Grid item xs={12} className={classes.grid}>
-          <Link href="#" id="answers-size" className={classes.menuButton}>
+          <Link href="/requestsbysize" id="answers-size" className={classes.menuButton}>
             Answers size
           </Link>
         </Grid>
