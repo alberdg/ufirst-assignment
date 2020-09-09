@@ -33,3 +33,10 @@ it('Groups requests by answer codes', async () => {
   expect(Object.keys(epaJsonInstance.recordsByAnswerCode).includes('501')).toBeTruthy();
   expect(Object.keys(epaJsonInstance.recordsByAnswerCode).includes('201')).toBeFalsy();
 })
+
+
+it('Groups requests by size with size < 1000 and response code equal to 200', async () => {
+  expect(epaJsonInstance.recordsBySize).not.toBeNull();
+  expect(Object.keys(epaJsonInstance.recordsBySize).length).toEqual(541);
+
+})

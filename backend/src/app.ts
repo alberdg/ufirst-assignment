@@ -4,6 +4,7 @@ import { epaJSONRouter } from './routes/epa-json';
 import { requestsByMinuteRouter } from './routes/requests-by-minute';
 import { httpMethodsRouter } from './routes/http-methods';
 import { answerCodesRouter } from './routes/answer-codes';
+import { requestsSizeRouter } from './routes/requests-by-size';
 
 const allowedOrigins = ['http://localhost:3000'];
 /**
@@ -35,6 +36,7 @@ app.use(epaJSONRouter);
 app.use(requestsByMinuteRouter);
 app.use(httpMethodsRouter);
 app.use(answerCodesRouter);
+app.use(requestsSizeRouter);
 
 app.all('*', async (req: Request, res: Response) => {
   res.status(404).send('Not found');

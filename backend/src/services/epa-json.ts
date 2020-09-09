@@ -9,6 +9,7 @@ class EpaJSON {
   private _recordsByMinute: any = {};
   private _recordsByMethod: any = {};
   private _recordsByAnswerCode: any = {};
+  private _recordsBySize: any = {};
 
   /**
    * Getter for EpaJSON
@@ -29,6 +30,7 @@ class EpaJSON {
     this.aggregateRecordsByMinute();
     this.aggregateRecordsByMethod();
     this.aggregateRecordsByAnswerCode();
+    this.aggregateRecordsBySize();
   }
 
   /**
@@ -125,6 +127,38 @@ class EpaJSON {
         };
       }
       this._recordsByAnswerCode[responseCodeKey].value++;
+    });
+  }
+
+  /**
+   * Getter for aggregated records by size
+   * @function
+   * @returns recordsByMinute Aggregated records by size
+   */
+  get recordsBySize () : any {
+    return this._recordsBySize;
+  }
+
+  /**
+   * Aggregates records by size
+   * @function
+   */
+  aggregateRecordsBySize () : void {
+    this._records.forEach((record: EPAJsonRecord) => {
+      const { response_code, document_size } :
+      { response_code: number, document_size: number } = record;
+      // Only want to keep those with status 200 and size < 1000 bytes
+      if (response_code === 200 && document_size < 1000) {
+        const documentSizeKey = `${document_size}`;
+        if (!this._recordsBySize[documentSizeKey]) {
+          this._recordsBySize[documentSizeKey] = {
+            id: documentSizeKey,
+            size: document_size,
+            value: 0
+          };
+        }
+        this._recordsBySize[documentSizeKey].value++;
+      }
     });
   }
 }
