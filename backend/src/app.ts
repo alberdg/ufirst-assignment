@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { json } from 'body-parser';
 import { epaJSONRouter } from './routes/epa-json';
 import { requestsByMinuteRouter } from './routes/requests-by-minute';
+import { httpMethodsRouter } from './routes/http-methods';
 
 const allowedOrigins = ['http://localhost:3000'];
 /**
@@ -31,6 +32,7 @@ app.use(json());
 app.use(setSecurityHeaders);
 app.use(epaJSONRouter);
 app.use(requestsByMinuteRouter);
+app.use(httpMethodsRouter);
 
 app.all('*', async (req: Request, res: Response) => {
   res.status(404).send('Not found');

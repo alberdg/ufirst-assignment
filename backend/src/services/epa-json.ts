@@ -7,6 +7,7 @@ import { EPAJsonRecord } from '../interfaces/epa-json';
 class EpaJSON {
   private _records: EPAJsonRecord[] = [];
   private _recordsByMinute: any = {};
+  private _recordsByMethod: any = {};
 
   /**
    * Getter for EpaJSON
@@ -20,6 +21,7 @@ class EpaJSON {
   set records (records: EPAJsonRecord[]) {
     this._records = records;
     this.aggregateRecordsByMinute();
+    this.aggregateRecordsByMethod();
   }
 
   /**
@@ -49,7 +51,7 @@ class EpaJSON {
    * Aggregates number of requests per minute
    * @function
    */
-  aggregateRecordsByMinute () {
+  aggregateRecordsByMinute () : void {
     const orderedByMinuteAsc: EPAJsonRecord[] = this.getRecordsOrderedByMinuteAsc();
 
     orderedByMinuteAsc.forEach((record: EPAJsonRecord) => {
@@ -62,6 +64,32 @@ class EpaJSON {
         };
       }
       this._recordsByMinute[key].value++;
+    });
+  }
+
+  /**
+   * Getter for aggregated records by method
+   * @function
+   * @returns recordsByMinute Aggregated records by method
+   */
+  get recordsByMethod () : any {
+    return this._recordsByMethod;
+  }
+
+  /**
+   * Aggregates records by method
+   * @function
+   */
+  aggregateRecordsByMethod () : void {
+    this._records.forEach((record: EPAJsonRecord) => {
+      const { method } : { method: string } = record.request;
+      if (!this._recordsByMethod[method]) {
+        this._recordsByMethod[method] = {
+          method,
+          value: 0
+        };
+      }
+      this._recordsByMethod[method].value++;
     });
   }
 }
