@@ -92,7 +92,7 @@ const Header = () : JSX.Element => {
             Http answer codes
           </Link>
 
-          <Link href="/answerssize" id="answers-size" className={classes.menuButton}>
+          <Link href="/requestsbysize" id="answers-size" className={classes.menuButton}>
             Answers size
           </Link>
         </Grid>
