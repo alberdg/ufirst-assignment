@@ -11,7 +11,8 @@ import UFirstGroupResponsiveBar from './responsive-bar-chart';
  * @function
  * @returns component Requests per answer code component
  */
-const RequestsPerAnswerCode = () => {
+const RequestsPerAnswerCode = ({ renderHeader = true } :
+  { renderHeader?: boolean }) => {
   const [ data, setData ] = useState<RequestsByAnswerCode[]>([]);
   const keys: string[] = [ 'value' ];
 
@@ -25,7 +26,7 @@ const RequestsPerAnswerCode = () => {
 
   return (
     <Grid container>
-      <Header />
+      <Header display={renderHeader}/>
       <ChartWrapper title="Requests per answer code">
         <UFirstGroupResponsiveBar
           data={data}

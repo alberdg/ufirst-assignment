@@ -11,7 +11,8 @@ import UFirstGroupResponsivePie from './responsive-pie-chart';
  * @function
  * @returns component Requests per method component
  */
-const RequestsPerMethod = () : JSX.Element => {
+const RequestsPerMethod = ({ renderHeader = true } :
+  { renderHeader?: boolean }) : JSX.Element => {
   const [ data, setData ] = useState<RequestsByMethod[]>([]);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const RequestsPerMethod = () : JSX.Element => {
 
   return (
     <Grid container>
-      <Header />
+      <Header display={renderHeader}/>
       <ChartWrapper title="Requests per method">
         <UFirstGroupResponsivePie
           data={data}

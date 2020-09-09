@@ -10,7 +10,8 @@ import UFirstGroupResponsiveBar from './responsive-bar-chart';
  * @function
  * @returns component Requests per minute component
  */
-const RequestsPerMinute = () : JSX.Element => {
+const RequestsPerMinute = ({ renderHeader = true } :
+  { renderHeader?: boolean }) : JSX.Element => {
   const [ data, setData ] = useState<RequestsByMinute[]>([]);
   const keys: string[] = [ 'value' ];
 
@@ -24,7 +25,7 @@ const RequestsPerMinute = () : JSX.Element => {
 
   return (
     <Grid container>
-      <Header />
+      <Header display={renderHeader}/>
       <ChartWrapper title="Requests per minute">
         <UFirstGroupResponsiveBar
           data={data}

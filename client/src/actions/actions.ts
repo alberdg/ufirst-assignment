@@ -5,6 +5,7 @@ import {
   HTTP_REQUEST_BY_METHOD_URL,
   HTTP_REQUEST_BY_ANSWER_CODE_URL,
   HTTP_REQUEST_BY_SIZE_URL,
+  DASHBOARD_DATA_URL,
 } from '../constants';
 import { EPAJsonRecord } from '../interfaces/epa-json';
 
@@ -56,5 +57,16 @@ export const getHttpRequestsByAnswerCode = async() : Promise<any> => {
  */
 export const getHttpRequestsBySize = async() : Promise<any> => {
   const response = await axios.get(HTTP_REQUEST_BY_SIZE_URL);
+  return response.data;
+}
+
+
+/**
+ * Retrieves dashboard data
+ * @function
+ * @returns data Dashboard data
+ */
+export const getDashboardData = async() : Promise<any> => {
+  const response = await axios.get(DASHBOARD_DATA_URL);
   return response.data;
 }

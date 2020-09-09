@@ -10,7 +10,8 @@ import UFirstGroupResponsiveBar from './responsive-bar-chart';
  * @function
  * @returns component Requests per size component
  */
-const RequestsPerSize = () => {
+const RequestsPerSize = ({ renderHeader = true } :
+  { renderHeader?: boolean }) => {
   const [ data, setData ] = useState<RequestsBySize[]>([]);
   const keys: string[] = [ 'value' ];
 
@@ -24,7 +25,7 @@ const RequestsPerSize = () => {
 
   return (
     <Grid container>
-      <Header />
+      <Header display={renderHeader} />
       <ChartWrapper title="Requests per size with status code 200 and less than 1000 bytes">
         <UFirstGroupResponsiveBar
           data={data}

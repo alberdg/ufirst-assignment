@@ -32,11 +32,12 @@ const useStyles = makeStyles((theme) => ({
  * @function
  * @returns element Header component
  */
-const Header = () : JSX.Element => {
+const Header = ({ display = true } :
+  { display?: boolean }) => {
   const classes = useStyles();
   const [ hiddenMenu, setHiddenMenu ] = useState(true);
   const matches = useMediaQuery('(max-width:414px)');
-
+  if (!display) return null;
   /**
    * Renders mobile links
    * @function
