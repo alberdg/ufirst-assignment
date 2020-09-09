@@ -1,5 +1,14 @@
 import React from 'react';
-import { EPAJsonRecord } from '../interfaces/epa-json';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles((theme) => ({
+  chart: {
+    height: 500,
+    padding: theme.spacing(2)
+  }
+}));
 
 /**
  * Functional component representing a header
@@ -7,14 +16,22 @@ import { EPAJsonRecord } from '../interfaces/epa-json';
  * @param props Component props
  * @returns element Header component
  */
-const ChartWrapper = ({ title, data } : { title: string, data: EPAJsonRecord[] }) : JSX.Element => {
+const ChartWrapper = ({
+    title,
+    children,
+  } :
+  {
+    title: string,
+    children: JSX.Element
+  }) : JSX.Element => {
+  const classes = useStyles();
     return (
-      <div id="chart-wrapper">
-        <h1 id="chart-title">{title}</h1>
-        <div id="chart">
-            <pre>{data}</pre>
-        </div>
-      </div>
+      <Grid item xs={12} id="chart-wrapper">
+        <Grid item xs={12} id="chart" className={classes.chart}>
+          <Typography id="chart-title" variant="h4" component="h1">{title}</Typography>
+          {children}
+        </Grid>
+      </Grid>
     );
 }
 

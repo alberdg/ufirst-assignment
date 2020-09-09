@@ -56,9 +56,12 @@ class EpaJSON {
       const { minute } : { minute: number } = record.datetime;
       const key: string = `${minute}`;
       if (!this._recordsByMinute[key]) {
-        this._recordsByMinute[key] = 0;
+        this._recordsByMinute[key] = {
+          minute: key,
+          value: 0
+        };
       }
-      this._recordsByMinute[key]++;
+      this._recordsByMinute[key].value++;
     });
   }
 }
