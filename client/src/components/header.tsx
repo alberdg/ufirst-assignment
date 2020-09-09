@@ -52,7 +52,7 @@ const Header = () : JSX.Element => {
           </Link>
         </Grid>
         <Grid item xs={12} className={classes.grid}>
-          <Link href="#" id="http-methods" className={classes.menuButton}>
+          <Link href="/httpmethods" id="http-methods" className={classes.menuButton}>
             Http Methods
           </Link>
         </Grid>

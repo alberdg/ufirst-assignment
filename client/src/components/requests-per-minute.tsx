@@ -4,7 +4,7 @@ import Header from './header';
 import ChartWrapper from './chart-wrapper';
 import { getHttpRequestsByMinute } from '../actions/actions';
 import { RequestsByMinute } from '../interfaces/request-by-minute';
-import UgroupResponsiveBar from './responsive-bar-chart';
+import UFirstGroupResponsiveBar from './responsive-bar-chart';
 /**
  * Functional component representing Requests per minute chart
  * @function
@@ -26,7 +26,7 @@ const RequestsPerMinute = () : JSX.Element => {
     <Grid container>
       <Header />
       <ChartWrapper title="Requests per minute">
-        <UgroupResponsiveBar
+        <UFirstGroupResponsiveBar
           data={data}
           keys={keys}
           indexBy="minute"

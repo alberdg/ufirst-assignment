@@ -12,7 +12,7 @@ import { RequestsByMinute } from '../interfaces/request-by-minute';
  * @param leftLegend Left legend text
  * @returns component UGroupResponsiveBar component
  */
-const UGroupResponsiveBar = ({
+const UFirstGroupResponsiveBar = ({
     data,
     keys,
     indexBy,
@@ -88,4 +88,4 @@ const UGroupResponsiveBar = ({
   )
 }
 
-export default UGroupResponsiveBar;
+export default UFirstGroupResponsiveBar;
