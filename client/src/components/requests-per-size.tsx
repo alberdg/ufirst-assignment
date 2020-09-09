@@ -6,9 +6,9 @@ import { getHttpRequestsBySize } from '../actions/actions';
 import { RequestsBySize } from '../interfaces/request-by-size';
 import UFirstGroupResponsiveBar from './responsive-bar-chart';
 /**
- * Functional component representing Requests per minute chart
+ * Functional component representing Requests per size chart
  * @function
- * @returns component Requests per minute component
+ * @returns component Requests per size component
  */
 const RequestsPerSize = () => {
   const [ data, setData ] = useState<RequestsBySize[]>([]);
