@@ -17,11 +17,11 @@ afterEach(() => {
 });
 
 // Skipping until we implement the dashboard
-it.skip('Renders chart wrapper', async () => {
+it('Renders chart wrapper', async () => {
   let length = await page.$$eval('#chart-wrapper', el => el.length);
-  expect(length).toEqual(1);
+  expect(length).toEqual(4);
   length = await page.$$eval('#chart-title', el => el.length);
-  expect(length).toEqual(1);
+  expect(length).toEqual(4);
   length = await page.$$eval('#chart', el => el.length);
-  expect(length).toEqual(1);
+  expect(length).toEqual(4);
 })

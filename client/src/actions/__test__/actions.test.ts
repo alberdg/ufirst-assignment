@@ -5,6 +5,7 @@ import {
   getHttpRequestsByMethod,
   getHttpRequestsByAnswerCode,
   getHttpRequestsBySize,
+  getDashboardData,
 } from '../actions';
 import {
   EPA_URL,
@@ -113,4 +114,11 @@ it('Requests data for http requests per size', async () => {
   expect(response['0'].value).toEqual(194);
   expect(response['33'].value).toEqual(2);
   expect(response['34'].value).toEqual(1);
+})
+
+
+it('Requests dashboard data', async () => {
+  const response = await getDashboardData();
+  expect(response).not.toBeNull();
+
 })
