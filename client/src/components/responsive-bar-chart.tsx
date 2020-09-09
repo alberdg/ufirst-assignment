@@ -20,7 +20,7 @@ const UFirstGroupResponsiveBar = ({
     leftLegend
   } :
   {
-    data: RequestsByMinute[],
+    data: any[],
     keys: string[],
     indexBy: string,
     bottomLegend: string,

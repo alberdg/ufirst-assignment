@@ -2,6 +2,7 @@ import { ThemeOptions } from '@material-ui/core/styles';
 export const EPA_URL: string = 'http://localhost:3001/json';
 export const HTTP_REQUEST_BY_MINUTE_URL: string = 'http://localhost:3001/requestsbyminute';
 export const HTTP_REQUEST_BY_METHOD_URL: string = 'http://localhost:3001/httpmethods';
+export const HTTP_REQUEST_BY_ANSWER_CODE_URL: string = 'http://localhost:3001/answercodes';
 
 export const THEME: ThemeOptions = {
   overrides: {
