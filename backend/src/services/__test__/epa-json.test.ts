@@ -19,3 +19,17 @@ it('Groups requests by method', async () => {
   expect(Object.keys(epaJsonInstance.recordsByMethod).includes('DELETE')).toBeFalsy();
   expect(Object.keys(epaJsonInstance.recordsByMethod).includes('HEAD')).toBeTruthy();
 })
+
+
+it('Groups requests by answer codes', async () => {
+  expect(epaJsonInstance.recordsByAnswerCode).not.toBeNull();
+  expect(Object.keys(epaJsonInstance.recordsByAnswerCode).length).toEqual(7);
+  expect(Object.keys(epaJsonInstance.recordsByAnswerCode).includes('200')).toBeTruthy();
+  expect(Object.keys(epaJsonInstance.recordsByAnswerCode).includes('404')).toBeTruthy();
+  expect(Object.keys(epaJsonInstance.recordsByAnswerCode).includes('304')).toBeTruthy();
+  expect(Object.keys(epaJsonInstance.recordsByAnswerCode).includes('403')).toBeTruthy();
+  expect(Object.keys(epaJsonInstance.recordsByAnswerCode).includes('302')).toBeTruthy();
+  expect(Object.keys(epaJsonInstance.recordsByAnswerCode).includes('500')).toBeTruthy();
+  expect(Object.keys(epaJsonInstance.recordsByAnswerCode).includes('501')).toBeTruthy();
+  expect(Object.keys(epaJsonInstance.recordsByAnswerCode).includes('201')).toBeFalsy();
+})

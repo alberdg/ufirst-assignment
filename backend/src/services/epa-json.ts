@@ -8,6 +8,7 @@ class EpaJSON {
   private _records: EPAJsonRecord[] = [];
   private _recordsByMinute: any = {};
   private _recordsByMethod: any = {};
+  private _recordsByAnswerCode: any = {};
 
   /**
    * Getter for EpaJSON
@@ -18,10 +19,16 @@ class EpaJSON {
     return this._records;
   }
 
+  /**
+   * Setter for EpaJson records
+   * @function
+   * @param records EPAJsonRecord array
+   */
   set records (records: EPAJsonRecord[]) {
     this._records = records;
     this.aggregateRecordsByMinute();
     this.aggregateRecordsByMethod();
+    this.aggregateRecordsByAnswerCode();
   }
 
   /**
@@ -91,6 +98,33 @@ class EpaJSON {
         };
       }
       this._recordsByMethod[method].value++;
+    });
+  }
+
+  /**
+   * Getter for aggregated records by method
+   * @function
+   * @returns recordsByMinute Aggregated records by method
+   */
+  get recordsByAnswerCode () : any {
+    return this._recordsByAnswerCode;
+  }
+
+  /**
+   * Aggregates records by answerCode
+   * @function
+   */
+  aggregateRecordsByAnswerCode () : void {
+    this._records.forEach((record: EPAJsonRecord) => {
+      const { response_code } : { response_code: number } = record;
+      const responseCodeKey = `${response_code}`;
+      if (!this._recordsByAnswerCode[responseCodeKey]) {
+        this._recordsByAnswerCode[responseCodeKey] = {
+          id: responseCodeKey,
+          value: 0
+        };
+      }
+      this._recordsByAnswerCode[responseCodeKey].value++;
     });
   }
 }

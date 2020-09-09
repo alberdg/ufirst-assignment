@@ -3,6 +3,7 @@ import { json } from 'body-parser';
 import { epaJSONRouter } from './routes/epa-json';
 import { requestsByMinuteRouter } from './routes/requests-by-minute';
 import { httpMethodsRouter } from './routes/http-methods';
+import { answerCodesRouter } from './routes/answer-codes';
 
 const allowedOrigins = ['http://localhost:3000'];
 /**
@@ -33,6 +34,7 @@ app.use(setSecurityHeaders);
 app.use(epaJSONRouter);
 app.use(requestsByMinuteRouter);
 app.use(httpMethodsRouter);
+app.use(answerCodesRouter);
 
 app.all('*', async (req: Request, res: Response) => {
   res.status(404).send('Not found');
