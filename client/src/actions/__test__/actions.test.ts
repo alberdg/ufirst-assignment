@@ -3,11 +3,13 @@ import {
   getEPAJsonRecords,
   getHttpRequestsByMinute,
   getHttpRequestsByMethod,
+  getHttpRequestsByAnswerCode,
 } from '../actions';
 import {
   EPA_URL,
   HTTP_REQUEST_BY_MINUTE_URL,
   HTTP_REQUEST_BY_METHOD_URL,
+  HTTP_REQUEST_BY_ANSWER_CODE_URL,
 } from '../../constants';
 beforeAll(() => {
   moxios.install();
@@ -42,6 +44,15 @@ beforeAll(() => {
       "HEAD": 408,
     }
   });
+
+  moxios.stubRequest(HTTP_REQUEST_BY_ANSWER_CODE_URL, {
+    status: 200,
+    response: {
+      "200": 30000,
+      "400": 10000,
+      "302": 6000,
+    }
+  });
 });
 
 afterAll(() => {
@@ -66,4 +77,12 @@ it('Requests data for http requests per method', async () => {
   expect(response['GET']).toEqual(40828);
   expect(response['POST']).toEqual(161);
   expect(response['HEAD']).toEqual(408);
+})
+
+it('Requests data for http requests per answer code', async () => {
+  const response = await getHttpRequestsByAnswerCode();
+  expect(response).not.toBeNull();
+  expect(response['200']).toEqual(30000);
+  expect(response['400']).toEqual(10000);
+  expect(response['302']).toEqual(6000);
 })
