@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -48,22 +48,25 @@ const Header = ({ display = true } :
     return (
       <Grid container>
         <Grid item xs={12} className={classes.grid}>
-          <Link href="#" id="requests-per-minute" className={classes.menuButton}>
+          <Link to="/" id="dashboard" className={classes.menuButton}>
+          Dashboard
+          </Link>
+          <Link to="/requests" id="requests-per-minute" className={classes.menuButton}>
           Requests per minute
           </Link>
         </Grid>
         <Grid item xs={12} className={classes.grid}>
-          <Link href="/httpmethods" id="http-methods" className={classes.menuButton}>
+          <Link to="/httpmethods" id="http-methods" className={classes.menuButton}>
             Http Methods
           </Link>
         </Grid>
         <Grid item xs={12} className={classes.grid}>
-          <Link href="/answercodes" id="http-answer-codes" className={classes.menuButton}>
+          <Link to="/answercodes" id="http-answer-codes" className={classes.menuButton}>
             Http answer codes
           </Link>
         </Grid>
         <Grid item xs={12} className={classes.grid}>
-          <Link href="/requestsbysize" id="answers-size" className={classes.menuButton}>
+          <Link to="/requestsbysize" id="answers-size" className={classes.menuButton}>
             Answers size
           </Link>
         </Grid>
@@ -81,19 +84,22 @@ const Header = ({ display = true } :
     return (
       <Grid container>
         <Grid item xs={12} className={classes.grid}>
-          <Link href="/requests" id="requests-per-minute" className={classes.menuButton}>
+          <Link to="/" id="dashboard" className={classes.menuButton}>
+          Dashboard
+          </Link>
+          <Link to="/requests" id="requests-per-minute" className={classes.menuButton}>
           Requests per minute
           </Link>
 
-          <Link href="/httpmethods" id="http-methods" className={classes.menuButton}>
+          <Link to="/httpmethods" id="http-methods" className={classes.menuButton}>
             Http Methods
           </Link>
 
-          <Link href="/answercodes" id="http-answer-codes" className={classes.menuButton}>
+          <Link to="/answercodes" id="http-answer-codes" className={classes.menuButton}>
             Http answer codes
           </Link>
 
-          <Link href="/answerssize" id="answers-size" className={classes.menuButton}>
+          <Link to="/requestsbysize" id="answers-size" className={classes.menuButton}>
             Answers size
           </Link>
         </Grid>

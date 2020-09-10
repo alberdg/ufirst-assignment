@@ -1,10 +1,11 @@
-import React, { useEffect, useState }  from 'react';
+import React, { useEffect, useState, useContext }  from 'react';
 import Grid from '@material-ui/core/Grid';
 import { getDashboardData } from '../actions/actions';
 import RequestsPerMinute from './requests-per-minute';
 import RequestsPerMethod from './requests-per-method';
 import RequestsPerAnswerCode from './requests-per-answer-code';
 import RequestsPerSize from './requests-per-size';
+import { DashboardContext } from '../context/dashboard-context';
 
 /**
  * Functional component to represent a dashboard
@@ -12,15 +13,17 @@ import RequestsPerSize from './requests-per-size';
  * @returns component Dashboard component
  */
 const Dashboard = () => {
-  const [ data, setData ] = useState<any>([]);
+  const { data, setData } = useContext(DashboardContext);
   const [ loading, setLoading ] = useState<boolean>(true);
 
   useEffect(() => {
-    (async () => {
-      const data = await getDashboardData();
-      setData(data);
-      setLoading(false);
-    })();
+    if (!data || !Array.isArray(data.recordsByMinute) || data.recordsByMinute.length === 0) {
+      (async () => {
+        const data = await getDashboardData();
+        setData(data);
+        setLoading(false);
+      })();
+    }
   }, []);
 
   /**
@@ -38,10 +41,10 @@ const Dashboard = () => {
         <Grid item xs={12}>
           <RequestsPerMethod renderHeader={false}/>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           <RequestsPerAnswerCode renderHeader={false}/>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           <RequestsPerSize renderHeader={false}/>
         </Grid>
       </>
