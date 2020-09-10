@@ -23,10 +23,9 @@ const RequestsPerMinute = ({ renderHeader = true } :
     const output: RequestsByMinute[] = (data) ? Object.values(data) : [];
     setData({ ...contextData, recordsByMinute: output });
   }
-  
+
   useEffect(() => {
     if (!data || !Array.isArray(data.recordsByMinute) || data.recordsByMinute.length === 0) {
-      console.log('RecordsByMinute is fetching data');
       (async () => {
         const data = await getHttpRequestsByMinute();
         storeData(data);

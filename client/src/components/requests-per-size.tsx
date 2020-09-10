@@ -26,7 +26,6 @@ const RequestsPerSize = ({ renderHeader = true } :
       })()
     }
   }, []);
-  console.log(data.recordsBySize)
   return (
     <Grid container>
       <Header display={renderHeader} />

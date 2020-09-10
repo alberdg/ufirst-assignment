@@ -14,6 +14,7 @@ import DashboardContextProvider from './context/dashboard-context';
 import * as serviceWorker from './serviceWorker';
 const theme : Theme = createMuiTheme(THEME);
 
+console.log('Rendering ALL')
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>

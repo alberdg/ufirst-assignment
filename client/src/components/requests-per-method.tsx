@@ -25,7 +25,7 @@ const RequestsPerMethod = ({ renderHeader = true } :
       })()
     }
   }, []);
-  console.log(data.recordsByMethod);
+
   return (
     <Grid container>
       <Header display={renderHeader}/>

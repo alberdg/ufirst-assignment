@@ -17,12 +17,9 @@ const Dashboard = () => {
   const [ loading, setLoading ] = useState<boolean>(true);
 
   useEffect(() => {
-    debugger;
     if (!data || !Array.isArray(data.recordsByMinute) || data.recordsByMinute.length === 0) {
-      console.log('Fetching data');
       (async () => {
         const data = await getDashboardData();
-        debugger;
         setData(data);
         setLoading(false);
       })();
