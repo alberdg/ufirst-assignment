@@ -4,10 +4,10 @@ const router: Router = Router();
 
 router.get('/dashboard', (req: Request, res: Response) => {
   res.send({
-    recordsByMinute: epaJsonInstance.recordsByMinute,
-    recordsByMethod: epaJsonInstance.recordsByMethod,
-    recordsByAnswerCode: epaJsonInstance.recordsByAnswerCode,
-    recordsBySize: epaJsonInstance.recordsBySize,
+    recordsByMinute: Object.values(epaJsonInstance.recordsByMinute),
+    recordsByMethod: Object.values(epaJsonInstance.recordsByMethod),
+    recordsByAnswerCode: Object.values(epaJsonInstance.recordsByAnswerCode),
+    recordsBySize: Object.values(epaJsonInstance.recordsBySize),
   });
 });
 

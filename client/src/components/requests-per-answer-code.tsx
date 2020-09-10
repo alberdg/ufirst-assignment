@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Header from './header';
 import ChartWrapper from './chart-wrapper';
 import { getHttpRequestsByAnswerCode } from '../actions/actions';
 import { RequestsByAnswerCode } from '../interfaces/request-by-answer-code';
 import UFirstGroupResponsiveBar from './responsive-bar-chart';
+import { DashboardContext } from '../context/dashboard-context';
 
 /**
  * Functional component representing Requests per answer code chart
@@ -13,15 +14,17 @@ import UFirstGroupResponsiveBar from './responsive-bar-chart';
  */
 const RequestsPerAnswerCode = ({ renderHeader = true } :
   { renderHeader?: boolean }) => {
-  const [ data, setData ] = useState<RequestsByAnswerCode[]>([]);
+  const { data, setData } = useContext(DashboardContext);
   const keys: string[] = [ 'value' ];
 
   useEffect(() => {
-    (async () => {
-      const data = await getHttpRequestsByAnswerCode();
-      const output: RequestsByAnswerCode[] = (data) ? Object.values(data) : [];
-      setData(output);
-    })()
+    if (!data || !Array.isArray(data.recordsByAnswerCode) || data.recordsByAnswerCode.length === 0) {
+      (async () => {
+        const data = await getHttpRequestsByAnswerCode();
+        const recordsByAnswerCode: RequestsByAnswerCode[] = (data) ? Object.values(data) : [];
+        setData({ ...data, recordsByAnswerCode });
+      })()
+    }
   }, []);
 
   return (
@@ -29,7 +32,7 @@ const RequestsPerAnswerCode = ({ renderHeader = true } :
       <Header display={renderHeader}/>
       <ChartWrapper title="Requests per answer code">
         <UFirstGroupResponsiveBar
-          data={data}
+          data={data.recordsByAnswerCode || []}
           keys={keys}
           indexBy="id"
           bottomLegend="Answer code"

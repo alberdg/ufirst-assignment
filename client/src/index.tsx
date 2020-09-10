@@ -9,6 +9,7 @@ import RequestsPerMinute from './components/requests-per-minute';
 import RequestsPerMethod from './components/requests-per-method';
 import RequestsPerAnswerCode from './components/requests-per-answer-code';
 import RequestsPerSize from './components/requests-per-size';
+import DashboardContextProvider from './context/dashboard-context';
 
 import * as serviceWorker from './serviceWorker';
 const theme : Theme = createMuiTheme(THEME);
@@ -16,15 +17,17 @@ const theme : Theme = createMuiTheme(THEME);
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={App}/>
-          <Route exact path="/httpmethods" component={RequestsPerMethod}/>
-          <Route exact path="/requests" component={RequestsPerMinute}/>
-          <Route exact path="/answercodes" component={RequestsPerAnswerCode}/>
-          <Route exact path="/requestsbysize" component={RequestsPerSize}/>
-        </Switch>
-      </BrowserRouter>
+      <DashboardContextProvider>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={App}/>
+            <Route exact path="/httpmethods" component={RequestsPerMethod}/>
+            <Route exact path="/requests" component={RequestsPerMinute}/>
+            <Route exact path="/answercodes" component={RequestsPerAnswerCode}/>
+            <Route exact path="/requestsbysize" component={RequestsPerSize}/>
+          </Switch>
+        </BrowserRouter>
+      </DashboardContextProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -48,7 +48,10 @@ const Header = ({ display = true } :
     return (
       <Grid container>
         <Grid item xs={12} className={classes.grid}>
-          <Link href="#" id="requests-per-minute" className={classes.menuButton}>
+          <Link href="/" id="dashboard" className={classes.menuButton}>
+          Dashboard
+          </Link>
+          <Link href="/requests" id="requests-per-minute" className={classes.menuButton}>
           Requests per minute
           </Link>
         </Grid>
@@ -81,6 +84,9 @@ const Header = ({ display = true } :
     return (
       <Grid container>
         <Grid item xs={12} className={classes.grid}>
+          <Link href="/" id="dashboard" className={classes.menuButton}>
+          Dashboard
+          </Link>
           <Link href="/requests" id="requests-per-minute" className={classes.menuButton}>
           Requests per minute
           </Link>
