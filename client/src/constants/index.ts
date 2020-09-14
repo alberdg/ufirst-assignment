@@ -1,6 +1,6 @@
 import { ThemeOptions } from '@material-ui/core/styles';
 const BASE_URL = 'http://localhost:3001';
-export const EPA_URL: string = 'http://localhost:3001/json';
+export const EPA_URL: string = `${BASE_URL}/json`;
 export const HTTP_REQUEST_BY_MINUTE_URL: string = `${BASE_URL}/requestsbyminute`;
 export const HTTP_REQUEST_BY_METHOD_URL: string = `${BASE_URL}/httpmethods`;
 export const HTTP_REQUEST_BY_ANSWER_CODE_URL: string = `${BASE_URL}/answercodes`;
