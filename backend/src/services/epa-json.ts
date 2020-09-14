@@ -139,6 +139,34 @@ class EpaJSON {
     return this._recordsBySize;
   }
 
+
+  /**
+   * Gets the key where a record should go by size
+   * @function
+   * @param documentSize Document size
+   * @returns key Key for the given document size
+   */
+  getRecordSizeKey (documentSize: number) : string {
+    const divisionResult: number = documentSize / 50;
+    const minKey : number = Math.floor(divisionResult);
+    const maxKey : number = (Math.ceil(divisionResult) || 1);
+    return `${minKey * 50}-${(maxKey === minKey) ? (maxKey + 1) * 50 : maxKey * 50}`;
+  }
+
+  /**
+   * Sorts recordsBySize in chunks of 50 bytes
+   * @function
+   */
+  sortRecordsBySize () : void {
+    const ordered = Array.from(Object.values(this._recordsBySize))
+      .sort((a: any, b: any) => {
+        const recordAKey = parseInt(a.id.split('-')[0]);
+        const recordBKey = parseInt(b.id.split('-')[0]);
+          return recordAKey - recordBKey;
+      });
+    this._recordsBySize = ordered;
+  }
+
   /**
    * Aggregates records by size
    * @function
@@ -149,7 +177,7 @@ class EpaJSON {
       { response_code: number, document_size: number } = record;
       // Only want to keep those with status 200 and size < 1000 bytes
       if (response_code === 200 && document_size < 1000) {
-        const documentSizeKey = `${document_size}`;
+        const documentSizeKey = this.getRecordSizeKey(document_size);
         if (!this._recordsBySize[documentSizeKey]) {
           this._recordsBySize[documentSizeKey] = {
             id: documentSizeKey,
@@ -159,6 +187,7 @@ class EpaJSON {
         this._recordsBySize[documentSizeKey].value++;
       }
     });
+    this.sortRecordsBySize();
   }
 }
 
