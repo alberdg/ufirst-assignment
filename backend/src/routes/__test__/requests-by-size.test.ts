@@ -13,5 +13,5 @@ it('Fetches http requests grouped by size', async () => {
       .get('/requestsbysize')
       .send({});
     expect(response.status).toEqual(200);
-    expect(Object.keys(response.body).length).toEqual(541);
+    expect(Object.keys(response.body).length).toEqual(20);
 });
